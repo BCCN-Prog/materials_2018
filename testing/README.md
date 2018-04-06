@@ -1,5 +1,5 @@
 # TESTING
-- start right away with the `maxima` function and the corresponding `maxima_exercise.ipynb`
+- start right away with the [`maxima.py`](maxima.py) function and the corresponding [`maxima_exercise.ipynb`](maxima_exercise.ipynb)
 - how do you keep track of the manual testing?
 
 
@@ -10,13 +10,13 @@
   - optimize and/or refactor
 
 ## test automation 
-  - `pytest`
+  - [`pytest`](http://pytest.org)
   - side effect: trust
   - side effect: faster development cycles
   - side effect: better code
 
 ## testing scientific code
-  - floating point equality: `np.isclose`, `np.allclose`
+  - floating point equality: [`np.isclose`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.isclose.html), [`np.allclose`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html)
   - classical reference: [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) ⟶ rewrite for humans: [Why don’t my numbers add up?](http://floating-point-gui.de)
 
 ## random bits
