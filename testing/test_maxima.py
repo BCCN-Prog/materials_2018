@@ -30,3 +30,7 @@ def test_sine_wave():
 # - plateau
 #   x = [1, 2, 2, 1]
 #   (decide for a sensible output in this case)
+# - test cases for plateau
+#   x = [1, 2, 2, 3, 1]
+#   x = [1, 3, 2, 2, 1]
+#   x = [3, 2, 2, 3]
