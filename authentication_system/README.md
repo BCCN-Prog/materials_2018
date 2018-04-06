@@ -20,9 +20,12 @@
   - salting ⟶ different users with same passwords should not have same hash ⟶ cracking one does not crack all: mitigates dictionary attacks)
 
 ### Try to crack it! (Advanced)
+  - can you guess the *hash collision* risk for the proposed solution?
+  - try first a *brute force* attack
+  - try a dictionary attach (you can use this list of [probable passwords](https://github.com/danielmiessler/SecLists/tree/master/Passwords)
 
 ### Notes 
 To make it for real:
   - insecure temporary file (temp race attack) ⟶ [`tempfile`](https://docs.python.org/3/library/tempfile.html) and its context managers
   - better way of generating passwords or random tokens: module [`secrets`](https://docs.python.org/3/library/secrets.html)
-
+  - cracking a password database is a form of art, see [John the Ripper password cracker](http://www.openwall.com/john/)
