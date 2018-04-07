@@ -1,5 +1,5 @@
 # TESTING
-- start right away with the [`maxima.py`](maxima.py) function and the corresponding [`maxima_exercise.ipynb`](maxima_exercise.ipynb)
+- start right away with the [`maxima.py`](maxima.py) function and the corresponding [`maxima_exercise.md`](maxima_exercise.md)
 - how do you keep track of the manual testing?
 
 
