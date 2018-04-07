@@ -1,4 +1,5 @@
 # Create a simple authentication system
+*an alternative to the hopelessly boring `hello world` examples for an introduction to git*
 
 ### Basic API:
   - a function `get_credentials` that asks for username and password
