@@ -7,10 +7,10 @@ def find_maxima(x):
     [2, 4]
 
     Input arguments:
-    x -- 1D list of real numbers
+        x -- 1D list numbers
 
     Output:
-    idx -- list of indices of the local maxima in x
+        idx -- list of indices of the local maxima in x
     """
 
     idx = []
