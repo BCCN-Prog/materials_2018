@@ -1,19 +1,15 @@
 import pickle
+import getpass
 
 def get_credentials():
-    username = input('Please type your user name: ')
-    password = input('Please type your password: ')
+    username = input('Please type your username: ')
+    password = getpass.getpass('Please type your password:')
     return username, password
 
 def authenticate(username, password, pwdb):
     status = False
     if username in pwdb:
         if pwdb[username] == password:
-            status = True
-    else:
-        ans = input('User not known. Add it to db? [y/n]')
-        if ans == 'y':
-            add_user(username, password, pwdb)
             status = True
     return status
 
@@ -44,7 +40,13 @@ def get_path():
 pwdb = read_pwdb()
 username, password = get_credentials()
 if authenticate(username, password, pwdb):
-    print(pwdb)
-else:
-    print('No match!')
+    print('Login successful')
+    ans = input('Add another User? [y/n]')
+    if ans == 'y':
+        username = input('Please type new username: ')
+        password = input('Please type new password: ')
+        add_user(username, password, pwdb)
+        status = True
 
+else:
+    print('Login failed')
