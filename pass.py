@@ -9,13 +9,16 @@ def get_credentials():
 def authenticate(username, password, pwdb):
     status = False
     if username in pwdb:
-        if pwdb[username] == password:
+        salt = pwdb[username]['salt']
+        hashed_password = hash_password(password, salt)
+        if pwdb[username]['password'] == hashed_password:
             status = True
     return status
 
 def add_user(username, password, pwdb):
     if username not in pwdb:
-        pwdb[username] = get_hash(password)
+        salt = get_salt()
+        pwdb[username] = {'password': hash_password(password, salt), 'salt': salt}
         write_pwdb(pwdb)
     else:
         print('User already known!')
@@ -37,10 +40,15 @@ def write_pwdb(pwdb):
 def get_path():
     return '/tmp/pwdb.pkl'
 
-def get_hash(password):
+def get_salt():
+    import uuid
+    return uuid.uuid4().hex
+
+def hash_password(password, salt):
     import hashlib
     password = password.encode('utf-8')
-    return hashlib.md5(password).hexdigest()
+    salt = salt.encode('utf-8')
+    return hashlib.md5(password + salt).hexdigest()
 
 pwdb = read_pwdb()
 username, password = get_credentials()
