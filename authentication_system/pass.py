@@ -25,7 +25,7 @@ def authenticate(username, pass_text, pwdb):
 
 def add_user(username, password, salt, paswdb, pwdb_file):
     if username in pwdb:
-        raise Exception('Unsername already exists [%s]' %username)
+        raise Exception('Username already exists [%s]' %username)
     else:
         pwdb[username] = (pwhash(password,salt), salt)
         write_pwdb(pwdb, pwdb_file)
