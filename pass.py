@@ -41,12 +41,13 @@ pwdb = read_pwdb()
 username, password = get_credentials()
 if authenticate(username, password, pwdb):
     print('Login successful')
-    ans = input('Add another User? [y/n]')
-    if ans == 'y':
-        username = input('Please type new username: ')
-        password = input('Please type new password: ')
-        add_user(username, password, pwdb)
-        status = True
+    if username == 'admin':
+        ans = input('Add another User? [y/n]')
+        if ans == 'y':
+            username = input('Please type new username: ')
+            password = getpass.getpass('Please type new password:')
+            add_user(username, password, pwdb)
+            status = True
 
 else:
     print('Login failed')
