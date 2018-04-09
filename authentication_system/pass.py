@@ -9,6 +9,8 @@ PWDB_FLNAME = pathlib.Path('pwdb.pkl')
 CHARS = string.ascii_letters + string.digits + string.punctuation
 
 def get_credentials():
+    ''' please input your name and the password.
+    '''
     username = input('Enter your username: ')
     password = getpass.getpass('Enter your password: ')
     return (username, password)
