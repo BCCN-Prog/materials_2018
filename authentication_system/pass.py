@@ -65,7 +65,6 @@ if __name__ == '__main__':
     pwdb = read_pwdb(pwdb_file)
 
     # add first user as admin
-    print(pwdb)
     if not pwdb:
         ans = input('Create database with this user? [y/n]')
         if ans == 'y':
