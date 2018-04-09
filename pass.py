@@ -15,10 +15,10 @@ def authenticate(username, password, pwdb):
             status = True
     return status
 
-def add_user(username, password, pwdb):
+def add_user(username, password, pwdb, admin = False):
     if username not in pwdb:
         salt = get_salt()
-        pwdb[username] = {'password': hash_password(password, salt), 'salt': salt}
+        pwdb[username] = {'password': hash_password(password, salt), 'salt': salt, 'admin': admin}
         write_pwdb(pwdb)
     else:
         print('User already known!')
@@ -52,15 +52,29 @@ def hash_password(password, salt):
 
 pwdb = read_pwdb()
 username, password = get_credentials()
+
+if not pwdb:
+    ans = input('Create database with this user? [y/n]')
+    if ans == 'y':
+        username = input('Please type new username: ')
+        password = getpass.getpass('Please type new password:')
+        add_user(username, password, pwdb, True)
+        print(pwdb)
+        status = True
+
 if authenticate(username, password, pwdb):
     print('Login successful')
-    if username == 'admin':
+    if pwdb[username]['admin']:
         ans = input('Add another User? [y/n]')
         if ans == 'y':
             username = input('Please type new username: ')
             password = getpass.getpass('Please type new password:')
-            add_user(username, password, pwdb)
+            admin = input('Give this user admin role? [y/n]')
+            if admin == 'y':
+                add_user(username, password, pwdb, admin = True)
+            else:
+                add_user(username, password, pwdb)
             print(pwdb)
-            status = True
+            print('User added successfully')
 else:
     print('Login failed')
