@@ -6,5 +6,5 @@ List of git commands with used:
   - `git status`: get current status of current repository
   - `git log`: visualize history of current repository
 
-A git tutorial for beginners: the fisr six chapters of the Software Carpentry [“Introduction to git” lecture](http://swcarpentry.github.io/git-novice/)
+A git tutorial for beginners: the fisr six chapters of the Software Carpentry [“Introduction to git”](http://swcarpentry.github.io/git-novice/) lecture
 
