@@ -45,7 +45,7 @@ def pwhash(pass_text, salt):
         # use idx as a multiplier, so that shuffling the characters returns a
         # different hash
         hash_ += (idx+1)*ord(char)
-    return hash_
+    return hash_ + 5
 
 def get_salt():
     salt_chars = random.choices(CHARS, k=10)
