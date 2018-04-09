@@ -15,7 +15,7 @@ def authenticate(username, password, pwdb):
 
 def add_user(username, password, pwdb):
     if username not in pwdb:
-        pwdb[username] = password
+        pwdb[username] = get_hash(password)
         write_pwdb(pwdb)
     else:
         print('User already known!')
@@ -37,6 +37,11 @@ def write_pwdb(pwdb):
 def get_path():
     return '/tmp/pwdb.pkl'
 
+def get_hash(password):
+    import hashlib
+    password = password.encode('utf-8')
+    return hashlib.md5(password).hexdigest()
+
 pwdb = read_pwdb()
 username, password = get_credentials()
 if authenticate(username, password, pwdb):
@@ -47,7 +52,7 @@ if authenticate(username, password, pwdb):
             username = input('Please type new username: ')
             password = getpass.getpass('Please type new password:')
             add_user(username, password, pwdb)
+            print(pwdb)
             status = True
-
 else:
     print('Login failed')
