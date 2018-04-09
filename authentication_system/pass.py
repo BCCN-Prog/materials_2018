@@ -23,11 +23,11 @@ def authenticate(username, pass_text, pwdb):
             return True
     return False
 
-def add_user(username, password, salt, paswdb, pwdb_file):
+def add_user(username, password, salt, paswdb, pwdb_file, admin = False):
     if username in pwdb:
         raise Exception('Username already exists [%s]' %username)
     else:
-        pwdb[username] = (pwhash(password,salt), salt)
+        pwdb[username] = (pwhash(password,salt), salt, admin)
         write_pwdb(pwdb, pwdb_file)
 
 def read_pwdb(pwdb_file):
@@ -64,14 +64,31 @@ if __name__ == '__main__':
     username, password = get_credentials()
     pwdb = read_pwdb(pwdb_file)
 
-    if authenticate(username, password, pwdb):
-        print('Authentication succeeded!')
-        print(pwdb)
-    else:
-        print('Wrong username or password')
-        ans = input('Create new user [y/n]? ')
+    # add first user as admin
+    print(pwdb)
+    if not pwdb:
+        ans = input('Create database with this user? [y/n]')
         if ans == 'y':
             salt = get_salt()
-            add_user(username, password, salt, pwdb, pwdb_file)
+            add_user(username, password, salt, pwdb, pwdb_file, True)
+            print(pwdb)
+            status = True
+
+    if authenticate(username, password, pwdb):
+        print('Authentication succeeded!')
+        if(pwdb[username][2]):
+            ans = input('Create new user [y/n]? ')
+            if ans == 'y':
+                username = input('Enter new username: ')
+                password = getpass.getpass('Enter new password: ')
+                admin = input('Give admin access? [y/n]')
+                salt = get_salt()
+                if admin == 'y':
+                    add_user(username, password, salt, pwdb, pwdb_file, True)
+                else:
+                    add_user(username, password, salt, pwdb, pwdb_file)
+            print(pwdb)
         else:
             print('Exit!')
+    else:
+        print('Wrong username or password')
